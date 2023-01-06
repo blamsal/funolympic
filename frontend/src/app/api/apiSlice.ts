@@ -11,7 +11,7 @@ import {
 } from '../../features/auth/authSlice';
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
+    baseUrl: process.env.REACT_APP_API_URL || "http://127.0.0.1:8000",
     credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const auth = (getState() as any).auth;
@@ -19,6 +19,7 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             headers.set("authorization", `Bearer ${token}`)
         }
+        console.log(process.env.REACT_APP_API_URL)
         return headers
     }
 })
